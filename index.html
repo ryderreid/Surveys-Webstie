@@ -11,7 +11,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f0f0f0;
+            background-color: transparent; /* Set initial background to transparent */
+            overflow: hidden; /* Hide overflow while loading */
         }
 
         .button-container {
@@ -22,6 +23,34 @@
             height: 100vh;
         }
 
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255); 
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid rgb(100, 61, 120);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
@@ -30,9 +59,9 @@
         a {
             margin: 10px;
             padding: 15px;
-            width: 200px; /* Set a fixed width for the buttons */
+            width: 200px; 
             font-size: 16px;
-            background-color: #4caf50;
+            background-color: rgb(100, 61, 120);
             color: white;
             border: none;
             border-radius: 5px;
@@ -44,11 +73,27 @@
 </head>
 <body>
 
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
     <div class="button-container">
         <h1>Young Mayors Survey</h1>
-        <a href="">Placespaces Survey</a>
-        <a href="">Sunsmart Survey</a>
-        <a href="">Improvements with Horsham Youth Council</a>
+        <a href="./forum/play">Placespaces Survey</a>
+        <a href="./forum/sunsmart.html">Sunsmart Survey</a>
+        <a href="./forum/improvements.html">Improvements with Horsham Youth Council</a>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            setTimeout(function() {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                document.body.style.backgroundColor = '#f0f0f0'; 
+                document.body.style.overflow = 'visible';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
